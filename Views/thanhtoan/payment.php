@@ -160,7 +160,7 @@
                             echo '<tr>
                             <th scope="row">'.$stt.'</th>
                             <td>'.$laptop['name'].'</td>
-                            <td><img style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal'.$stt.'"                 src="'.$laptop['image'].'" alt="laptop"></td>
+                            <td><img style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal'.$stt.'"                 src="./uploads/'.$laptop['image'].'" alt="laptop"></td>
                             <td>'.$laptop['giamgia'].'</td>
                             <td>'.$status.'</td>';
                             echo '
@@ -168,7 +168,7 @@
                                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable ">
                                         <div class="modal-content ">
                                             <div class="modal-body">
-                                            <img style="width:50rem" src="'.$laptop['image'].'" alt="laptop">
+                                            <img style="width:50rem" src="./uploads/'.$laptop['image'].'" alt="laptop">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

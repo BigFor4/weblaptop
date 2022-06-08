@@ -114,9 +114,6 @@ class payment_controller {
         require_once('./Views/thanhtoan/thanhtoan.php');
     }
     function list() {
-        
-
-        
         $listPayment = $this->payment_model->getListPayment();
         $listUser = $this->user_model->getUserlist();
         $listType = $this->type_model->getTypelist();
@@ -153,8 +150,22 @@ class payment_controller {
             if (isset($_POST['name'])) {
                 $users->name = $_POST['name'];
             }
-            if (isset($_POST['image'])) {
-                $users->image = $_POST['image'];
+            if (isset($_FILES['image'])) {
+
+                $img_name = $_FILES['image']['name'];
+                $tmp_name = $_FILES['image']['tmp_name'];
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $allowed_exs = array("jpg", "jpeg", "png");
+
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $new_img_name = uniqid("IMG-user", true) . '.' . $img_ex_lc;
+                    $img_upload_path = './uploads/' . $new_img_name;
+                    move_uploaded_file($tmp_name, $img_upload_path);
+                }
+                $users->image = $new_img_name;
+
             }
             
             if (isset($_POST['phone'])) {
@@ -187,4 +198,3 @@ class payment_controller {
         require_once("./Views/User/profile.php");
     }
 }
-?>

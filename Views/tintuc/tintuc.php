@@ -41,7 +41,7 @@
                                         </div>
                         
                                         <div class="col-lg-7 banner-img">
-                                            <img src="'.$laptop['image'].'" alt="part image" class="img-fluid">
+                                            <img src="./uploads/'.$laptop['image'].'" alt="part image" class="img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-8 ab-content-img">
-                                    <img src="'.$laptop['image'].'" alt="">
+                                    <img src="./uploads/'.$laptop['image'].'" alt="">
                                 </div>
                                 <div class="col-md-4 ab-content text-center p-lg-5 p-3 my-lg-5">
                                 <h1 style="color: #2196f3;">'.$status.'</h1>

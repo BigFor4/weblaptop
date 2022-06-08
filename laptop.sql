@@ -362,7 +362,7 @@ CREATE TABLE `v_order` (
 --
 DROP TABLE IF EXISTS `v_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`wbxleyue`@`localhost` SQL SECURITY DEFINER VIEW `v_data`  AS SELECT `o`.`id` AS `order_id`, `o`.`user_id` AS `user_id`, `od`.`product_id` AS `product_id`, `od`.`price` AS `price`, `o`.`status` AS `status` FROM (`order` `o` join `order-details` `od` on((`o`.`id` = `od`.`order_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_data`  AS SELECT `o`.`id` AS `order_id`, `o`.`user_id` AS `user_id`, `od`.`product_id` AS `product_id`, `od`.`price` AS `price`, `o`.`status` AS `status` FROM (`order` `o` join `order-details` `od` on((`o`.`id` = `od`.`order_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -371,7 +371,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`wbxleyue`@`localhost` SQL SECURITY DEFINER V
 --
 DROP TABLE IF EXISTS `v_order`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`wbxleyue`@`localhost` SQL SECURITY DEFINER VIEW `v_order`  AS SELECT `o`.`id` AS `order_id`, `o`.`user_id` AS `user_id`, `od`.`product_id` AS `product_id`, `od`.`price` AS `price`, `p`.`id` AS `payment_id`, `p`.`status` AS `status` FROM ((`order` `o` join `order-details` `od` on((`o`.`id` = `od`.`order_id`))) join `payment` `p` on((`o`.`id` = `p`.`order_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_order`  AS SELECT `o`.`id` AS `order_id`, `o`.`user_id` AS `user_id`, `od`.`product_id` AS `product_id`, `od`.`price` AS `price`, `p`.`id` AS `payment_id`, `p`.`status` AS `status` FROM ((`order` `o` join `order-details` `od` on((`o`.`id` = `od`.`order_id`))) join `payment` `p` on((`o`.`id` = `p`.`order_id`))) ;
 
 --
 -- Chỉ mục cho các bảng đã đổ

@@ -26,7 +26,7 @@
                                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                             <div class="item-product">
                                                 <div class="thumb">
-                                                <div style="height: 150px;"><img src="' . $sanpham['image'] . '" alt=""></div>                                                            <span class="sale">Giảm <br> '.$giamgia.'%</span>
+                                                <div style="height: 150px;"><img src="./uploads/' . $sanpham['image'] . '" alt=""></div>                                                            <span class="sale">Giảm <br> '.$giamgia.'%</span>
                                                     <div class="action">
                                                         <a href="index.php?controller=payment&action=view&id='.$sanpham['id'].'" class="buy"><i class="fa fa-cart-plus"></i> Mua ngay</a>
                                                         
@@ -54,7 +54,7 @@
                                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                         <div class="item-product">
                                             <div class="thumb">
-                                            <div style="height: 150px;"><img src="' . $sanpham['image'] . '" alt=""></div>                                                            <span class="sale">Giảm <br> '.$giamgia.'%</span>
+                                            <div style="height: 150px;"><img src="./uploads/' . $sanpham['image'] . '" alt=""></div>                                                            <span class="sale">Giảm <br> '.$giamgia.'%</span>
                                                 <div class="action">
                                                     <a href="index.php?controller=payment&action=view&id='.$sanpham['id'].'" class="buy"><i class="fa fa-cart-plus"></i> Mua ngay</a>
                                                     

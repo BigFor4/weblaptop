@@ -54,7 +54,7 @@
                                         }
                                         echo '<tr>
                                 			<td>'.($index++).'</td>
-                                			<td class="align-middle"><img width="150px" height="150px;" src="'.$sl['image'].'"/></td>
+                                			<td class="align-middle"><img width="150px" height="150px;" src="./uploads/'.$sl['image'].'"/></td>
                                 			<td >'.$sl['name'].'</td>
                                             <td>'.$typename.'</td>
                                            

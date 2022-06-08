@@ -6,62 +6,69 @@ require_once("./Models/Laptop_model.php");
 require_once("./Models/Type_model.php");
 
 
-class user_controller {
+class user_controller
+{
     private $user_model;
     private $laptop_model;
     private $type_model;
-    function __construct() {
+    function __construct()
+    {
         $this->user_model = new User_model();
         $this->laptop_model = new Laptop_model();
         $this->type_model = new Type_model();
-        
-        if (isset($_SESSION["email"]))
-        {
+
+        if (isset($_SESSION["email"])) {
             $this->user_id = $_SESSION['id'];
-        }
-        else{
+        } else {
             $this->user_id = "";
         }
     }
-    
-    public function run() {
-       
-        $actionGET = filter_input(INPUT_GET,"action");
-        if (method_exists($this,$actionGET))
+
+    public function run()
+    {
+
+        $actionGET = filter_input(INPUT_GET, "action");
+        if (method_exists($this, $actionGET))
             /* Gọi đến phương thức có tên tương ứng với actionGET */
             $this->$actionGET();
-            else {
-                print "Process List...";
-                $this->list();
-            }
-            
+        else {
+            print "Process List...";
+            $this->list();
+        }
     }
-    function create() {
-         $users = new User();
-         $check = $this->user_model->getUserlist();
-        if(!empty($_POST)){
-            
-            
-            
-            
+    function create()
+    {
+        $users = new User();
+        $check = $this->user_model->getUserlist();
+        if (!empty($_POST)) {
             if (isset($_POST['name'])) {
                 $users->name = $_POST['name'];
             }
-            if (isset($_POST['image'])) {
-               
-                $users->image = $_POST['image'];
-                
+            if (isset($_FILES['image'])) {
+
+                $img_name = $_FILES['image']['name'];
+                $tmp_name = $_FILES['image']['tmp_name'];
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $allowed_exs = array("jpg", "jpeg", "png");
+
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $new_img_name = uniqid("IMG-user", true) . '.' . $img_ex_lc;
+                    $img_upload_path = './uploads/' . $new_img_name;
+                    move_uploaded_file($tmp_name, $img_upload_path);
+                }
+                $users->image = $new_img_name;
             }
-           
+
             if (isset($_POST['email'])) {
                 $users->email = $_POST['email'];
-               
             }
-            
+
             if (isset($_POST['phone'])) {
                 $users->phone = $_POST['phone'];
             }
-            
+
             if (isset($_POST['address'])) {
                 $users->address = $_POST['address'];
             }
@@ -70,72 +77,83 @@ class user_controller {
             }
             $reuslt = $this->user_model->insert($users);
             if ($reuslt) {
-                echo json_encode(array('check'=>true,'message'=>"Insert successfully!"));
+                echo json_encode(array('check' => true, 'message' => "Insert successfully!"));
+            } else {
+                echo json_encode(array('check' => false, 'message' => "Insert NOT successfully! Error: "));
             }
-            else {
-                echo json_encode(array('check'=>false,'message'=>"Insert NOT successfully! Error: "));
-            }
-            
         }
-       
-        
+
+
         require_once("./Views/User/create.php");
     }
-     function quanmetkhau()
+    function quanmetkhau()
     {
-        
-         if(!empty($_POST)){
+
+        if (!empty($_POST)) {
             $email = "";
             if (isset($_POST['email'])) {
                 $email = $_POST['email'];
             }
             $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            $size = strlen( $chars );
+            $size = strlen($chars);
             $newpassword = "";
-            for( $i = 0; $i < 10; $i++ ) {
-            $newpassword .= $chars[ rand( 0, $size - 1 ) ];
+            for ($i = 0; $i < 10; $i++) {
+                $newpassword .= $chars[rand(0, $size - 1)];
             }
 
-            $result=$this->user_model->quenmatkhau($email,$newpassword);
+            $result = $this->user_model->quenmatkhau($email, $newpassword);
             $to      = $email;
             $subject = "Tiêu đề email";
             $message = "<h1>Mật khẩu mới của bạn là:'$newpassword'</h1>";       //MỚI
             $header  =  "From:myemail@exmaple.com \r\n";
             $header .=  "Cc:other@exmaple.com \r\n";
-            
+
             $header .= "MIME-Version: 1.0\r\n";             //MỚI
             $header .= "Content-type: text/html\r\n";       //MỚI
-           
-            $success = mail ($to,$subject,$message,$header);
+
+            $success = mail($to, $subject, $message, $header);
         }
         $check = $this->user_model->getUserlist();
         require_once("Views/quenmatkhau/quenmatkhau.php");
     }
-    function update() {
-        
-        $id  = filter_input(INPUT_GET,"id");
+    function update()
+    {
+
+        $id  = filter_input(INPUT_GET, "id");
         $listUser = $this->user_model->findById($id);
-        if(!empty($_POST)){
-            
+        if (!empty($_POST)) {
+
             $users = new User();
             if (isset($_POST['name'])) {
                 $users->name = $_POST['name'];
             }
-            if (isset($_POST['image'])) {
-                $users->image = $_POST['image'];
-                if($users->image == NULL)
-                {
+            if (isset($_FILES['image'])) {
+
+                $img_name = $_FILES['image']['name'];
+                $tmp_name = $_FILES['image']['tmp_name'];
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $allowed_exs = array("jpg", "jpeg", "png");
+
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $new_img_name = uniqid("IMG-user", true) . '.' . $img_ex_lc;
+                    $img_upload_path = './uploads/' . $new_img_name;
+                    move_uploaded_file($tmp_name, $img_upload_path);
+                }
+                $users->image = $new_img_name;
+                if ($users->image == NULL) {
                     $users->image = $listUser[0]['image'];
                 }
-                
             }
+
             if (isset($_POST['email'])) {
                 $users->email = $_POST['email'];
             }
             if (isset($_POST['phone'])) {
                 $users->phone = $_POST['phone'];
             }
-            
+
             if (isset($_POST['address'])) {
                 $users->address = $_POST['address'];
             }
@@ -151,27 +169,28 @@ class user_controller {
             $users->id = $id;
             $reuslt = $this->user_model->update($users);
         }
-        
-            
-       
-        
+
+
+
+
         require_once("./Views/User/update.php");
     }
-    function delete() {
-        if(!empty($_POST)){
-            
+    function delete()
+    {
+        if (!empty($_POST)) {
+
             $id = "";
             if (isset($_POST['id'])) {
                 $id = $_POST['id'];
             }
-            
-          
+
+
             $reuslt = $this->user_model->delete($id);
         }
-        
     }
-    
-    function list() {
+
+    function list()
+    {
 
         $result = $this->user_model->selectCountID();
         $number = 0;
@@ -200,28 +219,26 @@ class user_controller {
             $curent_pagePrevious = 1;
         }
         $index = ($curent_page - 1) * $numberOnePage;
-        $listUser =$this->user_model->selectNumber($index,$numberOnePage);
+        $listUser = $this->user_model->selectNumber($index, $numberOnePage);
         if ($listUser !== false) {
             require_once("./Views/User/index.php");
         }
-        
-       
     }
     function search()
     {
-        
-        $search = filter_input(INPUT_GET,"value");
-           
-            
-            
-            
-            $listUser = $this->user_model->searchByEmail($search);
-            
+
+        $search = filter_input(INPUT_GET, "value");
+
+
+
+
+        $listUser = $this->user_model->searchByEmail($search);
+
         require_once("./Views/User/search.php");
     }
     function dashboard()
     {
-        
+
         $dashboard = new dashboard();
         $listUser = $dashboard->getUser();
         $listLaptop = $dashboard->getLaptop();
@@ -236,12 +253,13 @@ class user_controller {
     }
     function dangxuat()
     {
-        
-        
+
+
         require_once("Views/dangnhap/dangnhap.php");
     }
-    function dangnhap() {
-       
+    function dangnhap()
+    {
+
         unset($_SESSION["email"]);
         unset($_SESSION["role_id"]);
         unset($_SESSION["name"]);
@@ -251,18 +269,16 @@ class user_controller {
         unset($_SESSION["phone"]);
         unset($_SESSION["password"]);
         $email = $password = "";
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             if (isset($_POST['email'])) {
                 $email = $_POST['email'];
-                
             }
             if (isset($_POST['password'])) {
                 $password = $_POST['password'];
             }
-            $reuslt = $this->user_model->login($email,$password);
-            if($reuslt)
-            {
-                
+            $reuslt = $this->user_model->login($email, $password);
+            if ($reuslt) {
+
                 $_SESSION['email'] = $email;
                 $_SESSION['role_id'] = $reuslt[0]['role_id'];
                 $_SESSION['name'] = $reuslt[0]['name'];
@@ -272,44 +288,40 @@ class user_controller {
                 $_SESSION['phone'] = $reuslt[0]['phone'];
                 $_SESSION['password'] = $reuslt[0]['password'];
             }
-           
-            
         }
         $check = $this->user_model->getUserlist();
-        
+
         require_once("Views/dangnhap/dangnhap.php");
     }
     function dangki()
     {
         $users = new User();
         $check = $this->user_model->getUserlist();
-        if(!empty($_POST)){
-            
-            
-            
-            
-                if (isset($_POST['name'])) {
-                    $users->name = $_POST['name'];
-                }
-                
-                
-                if (isset($_POST['email'])) {
-                    $users->email = $_POST['email'];
-                    
-                }
-                
-                if (isset($_POST['phone'])) {
-                    $users->phone = $_POST['phone'];
-                }
-                
-                if (isset($_POST['address'])) {
-                    $users->address = $_POST['address'];
-                }
-                if (isset($_POST['password'])) {
-                    $users->password = $_POST['password'];
-                }
-                $reuslt = $this->user_model->dangky($users);
+        if (!empty($_POST)) {
 
+
+
+
+            if (isset($_POST['name'])) {
+                $users->name = $_POST['name'];
+            }
+
+
+            if (isset($_POST['email'])) {
+                $users->email = $_POST['email'];
+            }
+
+            if (isset($_POST['phone'])) {
+                $users->phone = $_POST['phone'];
+            }
+
+            if (isset($_POST['address'])) {
+                $users->address = $_POST['address'];
+            }
+            if (isset($_POST['password'])) {
+                $users->password = $_POST['password'];
+            }
+            $reuslt = $this->user_model->dangky($users);
         }
         require_once('./Views/dangki/dangki.php');
     }
@@ -317,6 +329,4 @@ class user_controller {
     {
         require_once("./Views/user/profile.php");
     }
-    
 }
-?>

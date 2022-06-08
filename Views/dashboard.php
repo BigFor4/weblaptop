@@ -152,7 +152,7 @@
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             
-                                            <?php echo '<img  src="'.$_SESSION['image'].'" alt="haha">';?>
+                                            <?php echo '<img  src="./uploads/'.$_SESSION['image'].'" alt="haha">';?>
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#"><?php echo $_SESSION['name'];?>  </a>
@@ -162,7 +162,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                    <?php echo '<img  src="'.$_SESSION['image'].'" alt="haha">';?>
+                                                    <?php echo '<img  src="./uploads/'.$_SESSION['image'].'" alt="haha">';?>
                                                     </a>
                                                 </div>
                                                 <div class="content">

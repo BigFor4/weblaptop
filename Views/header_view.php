@@ -53,7 +53,7 @@
 							<?php 
                             if($_SESSION['image']!= null)
                             {
-                            echo '<img data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 10px; border-radius: 100px; width:50px ; height:50px" src="'.$_SESSION['image'].'" alt="haha">';
+                            echo '<img data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 10px; border-radius: 100px; width:50px ; height:50px" src="./uploads/'.$_SESSION['image'].'" alt="haha">';
                             }
                             else{
                                 echo '<img data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 10px; border-radius: 100px; width:50px ; height:50px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqh30_JHQRPWX4VFRnz_LQKvZMU6kt9VaWMwF6VioJh8DMGyWCfT--Bf2UsPGS0OaH91k&usqp=CAU" alt="haha">';
@@ -230,5 +230,4 @@
 			
 							    
 		});
-
     </script>

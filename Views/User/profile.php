@@ -30,7 +30,7 @@
 							<?php 
                             if($_SESSION['image']!= null)
                             {
-                            echo '<img data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 100px; width:200px ; height:200px" src="'.$_SESSION['image'].'" alt="haha">';
+                            echo '<img data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 100px; width:200px ; height:200px" src="uploads/'.$_SESSION['image'].'" alt="haha">';
                             }
                             else{
                                 echo '<img data-bs-toggle="dropdown" aria-expanded="false" style=" border-radius: 100px; width:200px ; height:200px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqh30_JHQRPWX4VFRnz_LQKvZMU6kt9VaWMwF6VioJh8DMGyWCfT--Bf2UsPGS0OaH91k&usqp=CAU" alt="haha">';

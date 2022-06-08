@@ -118,7 +118,7 @@
                         <form id="postPayment" method="post" >
                             <div class='credit-info-content'>
                                 <div>
-                                    <img class= "img-laptop" src='<?php echo $listLaptop[0]['image'] ?>' >
+                                    <img class= "img-laptop" src='<?php echo "./uploads/ '.$listLaptop[0]['image'].'" ?>' >
                                 </div>
                                 <div>
                                         <h5>Name:<?php echo $listLaptop[0]['name'] ?></h5>

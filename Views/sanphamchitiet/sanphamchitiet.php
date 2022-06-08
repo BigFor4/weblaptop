@@ -12,8 +12,8 @@ ob_start();
 				<div class="row">
 					<div class="col-md-6">
 						<ul class="slides">
-							<li data-thumb="'.$sanpham['image'].'">
-								<div class="thumb-image" > <img src="'.$sanpham['image'].'" data-imagezoom="true"
+							<li data-thumb="./uploads/'.$sanpham['image'].'">
+								<div class="thumb-image" > <img src="./uploads/'.$sanpham['image'].'" data-imagezoom="true"
 										class="img-responsive"> </div>
 							</li>
 						</ul>
@@ -47,8 +47,8 @@ ob_start();
 				<div class="row">
 					<div class="col-md-6">
 						<ul class="slides">
-							<li data-thumb="'.$sanpham['image'].'">
-								<div class="thumb-image"> <img src="'.$sanpham['image'].'" data-imagezoom="true"
+							<li data-thumb="./uploads/'.$sanpham['image'].'">
+								<div class="thumb-image"> <img src="./uploads/'.$sanpham['image'].'" data-imagezoom="true"
 										class="img-responsive"> </div>
 							</li>
 						</ul>

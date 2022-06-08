@@ -70,7 +70,7 @@
 
                                           if($sl['image'] != null)
                                           {
-                                            echo '<td class="align-middle"><img width="150px" height="150px;" src="'.$sl['image'].'"/></td>
+                                            echo '<td class="align-middle"><img width="150px" height="150px;"  src="./uploads/'.$sl['image'].'"/></td>
                                             ';
                                           }
                                           else

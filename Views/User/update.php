@@ -109,7 +109,7 @@
 							<div class="col-md-6">
                         		<div class="form-group">
                                   <label style="font-size:20px;color:black;">Image<span class="text-danger">*</span></label>
-                                  <input id="image"  type="url" class="form-control" name="image"  placeholder="Enter image" value="<?=$listUser[0]['image']?>">
+                                  <input id="image"  type="file" class="form-control" name="image"  placeholder="Enter image" value="<?=$listUser[0]['image']?>">
                                </div>
                         	</div>
 
